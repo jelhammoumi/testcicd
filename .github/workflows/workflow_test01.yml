@@ -9,5 +9,5 @@ jobs:
   steps:
     - run: echo "Hello jaouad the lead to developers !!"
     - run: mkdir test
-    - run: cd test
+    #- run: cd test
     - uses: actions/checkout@v2
