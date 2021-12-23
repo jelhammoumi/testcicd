@@ -6,3 +6,5 @@ jobs:
  hell_job:
   name: Hello CI CD Job
   runs-on: self-hosted
+  steps:
+    - run: echo "Hello jaouad the lead to developers !!"
