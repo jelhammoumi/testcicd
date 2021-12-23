@@ -2,4 +2,7 @@ name: "Test CI CD workflow"
 
 on: [ push ]
 
-runs-on: self-hosted
+jobs:
+ hell_job:
+  name: Hello CI CD Job
+  runs-on: self-hosted
