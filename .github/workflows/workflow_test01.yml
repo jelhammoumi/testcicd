@@ -1,0 +1,5 @@
+name: "Test CI CD workflow"
+
+on: [ push ]
+
+runs-on: self-hosted
