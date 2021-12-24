@@ -7,7 +7,7 @@ jobs:
   name: Hello CI CD Job
   runs-on: self-hosted
   steps:
-    - run: echo "Hello jaouad the lead to developers !!"
-    #- run: mkdir test
+    - run: echo "Hello Othmane Chtoune !!"
+    - run: mkdir test
     - run: cd test
     - uses: actions/checkout@v2
