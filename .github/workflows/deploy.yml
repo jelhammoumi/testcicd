@@ -1,0 +1,23 @@
+# This workflow deploy the EP repository to AWS instances
+
+name: EP CI/CD Azure test
+
+on:
+  push:
+    branches: [ main-githubactions-test ]
+
+  workflow_dispatch:
+
+env:
+  RELEASE_IDENTIFIER: electroplanet-release-${{github.run_id}}.tar.gz
+jobs:
+  
+  checkout-release:
+    runs-on: vm-epecom-www-01
+    environment: preprod
+    env:
+      RELEASE_ENV: ${{ secrets.RELEASE_ENV }}
+      DOCUMENT_ROOT: ${{ secrets.DOCUMENT_ROOT }}
+
+    steps:
+      - uses: ./.github/actions/s3-magento-code-base
