@@ -6,7 +6,7 @@ inputs:
     description: 'The destination directory'
     required: true
     default: 'test'
-    
+
 runs:
   using: "composite"
   steps:
