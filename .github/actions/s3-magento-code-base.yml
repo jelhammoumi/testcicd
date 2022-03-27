@@ -2,9 +2,6 @@
 
 name: EP CI/CD - MAGENTO CODE BASE
 
-on:
-  workflow_call:
-
 env:
   RELEASE_IDENTIFIER: electroplanet-release-${{github.run_id}}.tar.gz
 jobs:
