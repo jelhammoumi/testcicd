@@ -1,5 +1,4 @@
 # This workflow get the magento code base
-
 name: 'EP CI/CD - MAGENTO CODE BASE S3 UPLOAD'
 description: 'Download the magento code base from S3 using aws cli'
 inputs:
