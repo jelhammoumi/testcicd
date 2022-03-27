@@ -21,6 +21,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - uses: ./.github/actions/s3-magento-code-base
+      - uses: ./.github/workflows/deploy-checkout-code-base.yml@master
         with:
-         dest_dir: $DOCUMENT_ROOT
+         filename: $DOCUMENT_ROOT

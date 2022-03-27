@@ -1,0 +1,20 @@
+# This workflow get the magento code base
+
+name: EP CI/CD - MAGENTO CODE BASE
+
+on:
+  workflow_call:
+    inputs:
+      filename:
+        required: true
+        type: string
+
+env:
+  RELEASE_IDENTIFIER: electroplanet-release-${{github.run_id}}.tar.gz
+jobs:
+  checkout-magento-code-base:
+    - name: "EP CI/CD - MAGENTO CODE BASE"
+        run: |
+        echo "checkout magento code base"
+        echo file to download ${{ inputs.filename }}
+        
