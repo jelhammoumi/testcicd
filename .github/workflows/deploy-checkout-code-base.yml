@@ -15,7 +15,7 @@ jobs:
   checkout-magento-code-base:
     name: "EP CI/CD - MAGENTO CODE BASE"
     steps:
-        run: |
+       - run: |
         echo "checkout magento code base"
         echo file to download ${{ inputs.filename }}
         
