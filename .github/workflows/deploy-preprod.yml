@@ -20,6 +20,6 @@ jobs:
       DOCUMENT_ROOT: ${{ secrets.DOCUMENT_ROOT }}
 
     steps:
-      - uses: ./.github/actions/s3-magento-code-bas
+      - uses: ./.github/actions/s3-magento-code-base
         with:
             dest_dir: $DOCUMENT_ROOT
