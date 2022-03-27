@@ -25,3 +25,4 @@ runs:
   steps:
     - run: echo donwload to : ${{ inputs.dest_dir }}.
       shell: bash
+      uses:
