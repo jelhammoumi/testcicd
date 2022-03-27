@@ -21,10 +21,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      
   
   checkout-code-base:
     needs: checkout-release
-    uses: ./.github/workflows/deploy-checkout-code-base.yml@master
+    uses: ./.github/workflows/deploy-checkout-code-base.yml
     with:
      filename: "/var/www/cicd"
