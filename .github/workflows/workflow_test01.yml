@@ -1,6 +1,8 @@
 name: "Test CI CD workflow"
 
-on: [ push ]
+on:
+  push:
+    branches: [ main-githubactions-test ]
 
 jobs:
  hell_job:

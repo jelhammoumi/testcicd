@@ -4,7 +4,7 @@ name: EP CI/CD Azure test
 
 on:
   push:
-    branches: [ main-githubactions-test ]
+    branches: [ master ]
 
   workflow_dispatch:
 
