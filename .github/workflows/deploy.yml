@@ -13,7 +13,7 @@ env:
 jobs:
   
   checkout-release:
-    runs-on: vm-epecom-www-01
+    runs-on: testcicd
     environment: preprod
     env:
       RELEASE_ENV: ${{ secrets.RELEASE_ENV }}
