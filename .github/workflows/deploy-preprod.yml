@@ -21,6 +21,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - uses: ./.github/workflows/deploy-checkout-code-base.yml@master
-        with:
-         filename: $DOCUMENT_ROOT
+      
+  
+  checkout-code-base:
+    needs: checkout-release
+    uses: ./.github/workflows/deploy-checkout-code-base.yml@master
+    with:
+     filename: $DOCUMENT_ROOT
