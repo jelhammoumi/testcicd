@@ -10,8 +10,8 @@ on:
 
 env:
   RELEASE_IDENTIFIER: electroplanet-release-${{github.run_id}}.tar.gz
-jobs:
   
+jobs:
   checkout-release:
     runs-on: testcicd
     environment: preprod
@@ -20,6 +20,6 @@ jobs:
       DOCUMENT_ROOT: ${{ secrets.DOCUMENT_ROOT }}
 
     steps:
-      - uses: ./.github/actions/s3-magento-code-base
+      - uses: ./.github/actions/s3-magento-code-bas
         with:
             dest_dir: $DOCUMENT_ROOT
