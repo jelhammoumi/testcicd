@@ -12,6 +12,7 @@ env:
   RELEASE_IDENTIFIER: electroplanet-release-${{github.run_id}}.tar.gz
 jobs:
   checkout-magento-code-base:
+    runs-on: self-hosted
     name: "EP CI/CD - MAGENTO CODE BASE"
     steps:
       - run: |
