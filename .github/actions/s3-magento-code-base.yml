@@ -2,14 +2,6 @@
 
 name: EP CI/CD - MAGENTO CODE BASE
 
-env:
-  RELEASE_IDENTIFIER: electroplanet-release-${{github.run_id}}.tar.gz
-jobs:
-  checkout-magento-code-base:
-    - name: "EP CI/CD - MAGENTO CODE BASE"
-        run: |
-        echo "checkout magento code base"
-
 name: 'EP CI/CD - MAGENTO CODE BASE S3 UPLOAD'
 description: 'Download the magento code base from S3 using aws cli'
 inputs:
@@ -22,4 +14,3 @@ runs:
   steps:
     - run: echo donwload to : ${{ inputs.dest_dir }}.
       shell: bash
-      uses:
