@@ -10,5 +10,5 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - run: echo donwload to.
+    - run: echo donwload to : ${{ inputs.dest_dir }}
       shell: bash
