@@ -20,6 +20,7 @@ jobs:
       DOCUMENT_ROOT: ${{ secrets.DOCUMENT_ROOT }}
 
     steps:
+      - uses: actions/checkout@v2
       - uses: ./.github/actions/s3-magento-code-base
         with:
             dest_dir: $DOCUMENT_ROOT
