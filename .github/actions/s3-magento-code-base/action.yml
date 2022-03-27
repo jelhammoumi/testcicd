@@ -6,6 +6,7 @@ inputs:
   dest_dir:
     description: 'The destination directory'
     required: true
+    default: 'test'
     
 runs:
   using: "composite"

@@ -23,4 +23,4 @@ jobs:
       - uses: actions/checkout@v2
       - uses: ./.github/actions/s3-magento-code-base
         with:
-            dest_dir: $DOCUMENT_ROOT
+         dest_dir: $DOCUMENT_ROOT
