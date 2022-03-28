@@ -25,5 +25,5 @@ jobs:
   checkout-code-base:
     needs: checkout-release
     uses: ./.github/workflows/deploy-checkout-code-base.yml
-    secrets:
+    with:
      S3filename: $S3_MAGENTO_CODE_BASE_243_FILENAME
