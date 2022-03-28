@@ -71,7 +71,7 @@ jobs:
           
   checkout-build-deploy:
     needs: checkout-release-builder
-    runs-on: [vm-epecom-admin,vm-epecom-www]
+    runs-on: [vm-epecom-admin, vm-epecom-www]
     environment: preprod
     steps:
         - name: Deploy the build artifact to all environment instances
