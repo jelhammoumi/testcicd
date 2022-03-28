@@ -10,6 +10,7 @@ on:
 
 env:
   RELEASE_IDENTIFIER: electroplanet-release-${{github.run_id}}.tar.gz
+  S3_MAGENTO_CODE_BASE_243_FILENAME:
   
 jobs:
   checkout-release:
@@ -18,7 +19,7 @@ jobs:
     env:
       RELEASE_ENV: ${{ secrets.RELEASE_ENV }}
       DOCUMENT_ROOT: ${{ secrets.DOCUMENT_ROOT }}
-
+      S3_MAGENTO_CODE_BASE_243_FILENAME: ${{ secrets.S3_MAGENTO_CODE_BASE_243_FILENAME }}
     steps:
       - uses: actions/checkout@v2
   
@@ -26,4 +27,4 @@ jobs:
     needs: checkout-release
     uses: ./.github/workflows/deploy-checkout-code-base.yml
     secrets:
-     S3filename: ${{ secrets.S3_MAGENTO_CODE_BASE_243_FILENAME }}
+     S3filename: $S3_MAGENTO_CODE_BASE_243_FILENAME
