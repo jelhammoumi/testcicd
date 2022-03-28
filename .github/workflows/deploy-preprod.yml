@@ -15,6 +15,7 @@ env:
 jobs:
   checkout-release:
     runs-on: testcicd
+    environment: preprod
     env:
       RELEASE_ENV: ${{ secrets.RELEASE_ENV }}
       DOCUMENT_ROOT: ${{ secrets.DOCUMENT_ROOT }}
