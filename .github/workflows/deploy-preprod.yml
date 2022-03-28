@@ -12,7 +12,7 @@ env:
   RELEASE_IDENTIFIER: electroplanet-release-${{github.run_id}}.tar.gz
   APP_BUILD_IDENTIFIER: electroplanet-build-${{github.run_id}}.tar.gz
 jobs:
-  checkout-release:
+  checkout-release-builder:
     runs-on: vm-epecom-admin
     environment: preprod
     env:
@@ -22,7 +22,7 @@ jobs:
       - name: Checkout release from github repository
         uses: actions/checkout@v2
         
-      - name: Perform 
+      - name: Performing magento configuration
         run: |
           mv app/etc/env-$RELEASE_ENV.php app/etc/env.php
           rm -f app/etc/env-*.php
@@ -68,3 +68,13 @@ jobs:
           name: ${{ env.APP_BUILD_IDENTIFIER }}
           path: ${{ env.PROJECT_RELEASE_DIR }}/${{ env.APP_BUILD_IDENTIFIER }}
           retention-days: 1
+          
+  checkout-build-deploy:
+    needs: checkout-release-builder
+    runs-on: [vm-epecom-admin,vm-epecom-www]
+    environment: preprod
+    steps:
+        - name: Deploy the build artifact to all environment instances
+          run: |
+            pwd
+            echo ${{ env.PROJECT_RELEASE_DIR }}/${{ env.APP_BUILD_IDENTIFIER }} > deploy.txt
