@@ -15,7 +15,7 @@ jobs:
     name: "EP CI/CD - MAGENTO CODE BASE"
     steps:
       - run: |
-          echo S3 file ${{ secrets.S3filename }}
-          aws s3 cp ${{ secrets.S3filename }} .
+          echo S3 file ${{ secrets.S3filename }} > test.txt
+          #aws s3 cp ${{ secrets.S3filename }} .
           
         
