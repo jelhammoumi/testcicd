@@ -3,20 +3,20 @@ name: EP CI/CD - MAGENTO CODE BASE
 
 on:
   workflow_call:
-    inputs:
+    secrets:
       S3filename:
         required: true
-        type: string
 
 env:
   RELEASE_IDENTIFIER: electroplanet-release-${{github.run_id}}.tar.gz
+  
 jobs:
   checkout-magento-code-base:
     runs-on: self-hosted
     name: "EP CI/CD - MAGENTO CODE BASE"
     steps:
       - run: |
-          echo S3 file ${{ inputs.S3filename }} > test.txt
-          #aws s3 cp ${{ inputs.S3filename }} .
+          echo S3 file ${{ secrets.S3filename }} > test.txt
+          #aws s3 cp ${{ secrets.S3filename }} .
           
         
