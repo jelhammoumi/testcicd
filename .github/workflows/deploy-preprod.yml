@@ -17,7 +17,7 @@ jobs:
     environment: preprod
     env:
       RELEASE_ENV: ${{ secrets.RELEASE_ENV }}
-      DOCUMENT_ROOT: ${{ secrets.DOCUMENT_ROOT }}
+      PROJECT_RELEASE_DIR: ${{ secrets.PROJECT_RELEASE_DIR }}
     steps:
       - name: Checkout release from github repository
         uses: actions/checkout@v2
@@ -44,17 +44,19 @@ jobs:
           rm specifics -R
           touch $RELEASE_IDENTIFIER
           tar -czf $RELEASE_IDENTIFIER --exclude=.git --exclude=.github --exclude=.idea --exclude=$RELEASE_IDENTIFIER .
-          mv $RELEASE_IDENTIFIER $DOCUMENT_ROOT
+          (if [ -d "${PROJECT_RELEASE_DIR}" ]; then rm -fr $PROJECT_RELEASE_DIR; fi);
+          (if [ ! -d "${PROJECT_RELEASE_DIR}" ]; then mkdir $PROJECT_RELEASE_DIR; fi);
+          mv $RELEASE_IDENTIFIER $PROJECT_RELEASE_DIR
 
       - name: Download magento code base from S3
         run: |
-          aws s3 cp ${{ secrets.S3_MAGENTO_CODE_BASE_243_FILEPATH }} $DOCUMENT_ROOT/magento-code-base.tar
+          aws s3 cp ${{ secrets.S3_MAGENTO_CODE_BASE_243_FILEPATH }} $PROJECT_RELEASE_DIR/magento-code-base.tar
             
       - name: Building the application
         run: |
-          cd $DOCUMENT_ROOT
+          cd $PROJECT_RELEASE_DIR
           tar -xf magento-code-base.tar
-          rm magento-code-base.tar
+          #rm magento-code-base.tar
           tar -xf $RELEASE_IDENTIFIER
-          rm $RELEASE_IDENTIFIER
+          #rm $RELEASE_IDENTIFIER
             
