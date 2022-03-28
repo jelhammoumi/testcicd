@@ -11,9 +11,11 @@ on:
 env:
   RELEASE_IDENTIFIER: electroplanet-release-${{github.run_id}}.tar.gz
   APP_BUILD_IDENTIFIER: electroplanet-build-${{github.run_id}}.tar.gz
+  PROJECT_RELEASE_DIR:
+  
 jobs:
   checkout-release-builder:
-    runs-on: vm-epecom-admin
+    runs-on: vm-epecom-admin-test
     environment: preprod
     env:
       RELEASE_ENV: ${{ secrets.RELEASE_ENV }}
@@ -70,7 +72,7 @@ jobs:
           retention-days: 1
           
   checkout-build-deploy:
-    needs: checkout-release-builder
+    #needs: checkout-release-builder
     runs-on: self-hosted
     environment: preprod
     steps:
