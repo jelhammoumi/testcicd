@@ -10,7 +10,7 @@ on:
 
 env:
   RELEASE_IDENTIFIER: electroplanet-release-${{github.run_id}}.tar.gz
-  
+  APP_BUILD_IDENTIFIER: electroplanet-build-${{github.run_id}}.tar.gz
 jobs:
   checkout-release:
     runs-on: vm-epecom-admin
@@ -56,7 +56,15 @@ jobs:
         run: |
           cd $PROJECT_RELEASE_DIR
           tar -xf magento-code-base.tar
-          #rm magento-code-base.tar
+          rm magento-code-base.tar
           tar -xf $RELEASE_IDENTIFIER
-          #rm $RELEASE_IDENTIFIER
-            
+          rm $RELEASE_IDENTIFIER
+          touch $APP_BUILD_IDENTIFIER
+          tar -czf $APP_BUILD_IDENTIFIER --exclude=$APP_BUILD_IDENTIFIER .
+          
+      - name: Store build as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: $APP_BUILD_IDENTIFIER
+          path: $PROJECT_RELEASE_DIR/$APP_BUILD_IDENTIFIER
+          retention-days: 1
