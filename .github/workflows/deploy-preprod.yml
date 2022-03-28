@@ -26,4 +26,4 @@ jobs:
     needs: checkout-release
     uses: ./.github/workflows/deploy-checkout-code-base.yml
     with:
-     filename: "/var/www/cicd"
+     s3-filename: ${{ secrets.S3_MAGENTO_CODE_BASE_243_FILENAME }}
