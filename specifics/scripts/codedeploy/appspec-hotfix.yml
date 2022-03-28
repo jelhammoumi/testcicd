@@ -1,0 +1,21 @@
+###############################################################################################
+# Magento AWS Code Deploy Script
+# author : Jaouad EL HAMMOUMI
+# update : 10/07/2018
+#
+# description : code deploy deployment hooks for preprod environment to deploy a hotfix into the current release
+###############################################################################################
+
+version: 0.0
+
+os: linux
+
+files:
+  - source: ./code
+    destination: /data/www/client/electroplanet/codedeploy-release
+
+hooks:
+
+  AfterInstall:
+    - location: ./scripts/hotfix.sh
+      timeout: 1000

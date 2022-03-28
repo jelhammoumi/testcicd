@@ -1,0 +1,31 @@
+###############################################################################################
+# Magento AWS Code Deploy Script
+# author : Jaouad EL HAMMOUMI
+# update : 10/07/2018
+#
+# description : code deploy deployment hooks for production environment to deploy new release
+###############################################################################################
+
+version: 0.0
+
+os: linux
+
+files:
+  - source: ./code
+    destination: /data/www/client/electroplanet/codedeploy-release
+
+hooks:
+
+  BeforeInstall:
+    - location: ./scripts/before-install.sh
+      timeout: 900
+
+  AfterInstall:
+    - location: ./scripts/after-install.sh
+      timeout: 1800
+#  ApplicationStart:
+#    - location: ./scripts/application-start.sh
+#      timeout: 900
+#  ValidateService:
+#    - location: ./scripts/validate-service.sh
+#      timeout: 900
