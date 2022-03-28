@@ -48,10 +48,13 @@ jobs:
 
       - name: Download magento code base from S3
         run: |
-          aws s3 cp ${{ secrets.S3_MAGENTO_CODE_BASE_243_FILENAME }} $DOCUMENT_ROOT
+          aws s3 cp ${{ secrets.S3_MAGENTO_CODE_BASE_243_FILENAME }} $DOCUMENT_ROOT/magento-code-base.tar.gz
             
       - name: Building the application
         run: |
           cd $DOCUMENT_ROOT
-          ls -lh
+          tar -xf magento-code-base.tar.gz
+          rm -f magento-code-base.tar.gz
+          tar -xf $RELEASE_IDENTIFIER
+          rm $RELEASE_IDENTIFIER
             
