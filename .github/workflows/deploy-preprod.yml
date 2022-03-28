@@ -66,4 +66,5 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: ${{ env.APP_BUILD_IDENTIFIER }}
+          path: ${{ env.PROJECT_RELEASE_DIR }}/${{ env.APP_BUILD_IDENTIFIER }}
           retention-days: 1
