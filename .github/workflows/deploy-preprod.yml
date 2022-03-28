@@ -19,9 +19,39 @@ jobs:
       RELEASE_ENV: ${{ secrets.RELEASE_ENV }}
       DOCUMENT_ROOT: ${{ secrets.DOCUMENT_ROOT }}
     steps:
-      - name: Download magento code base from S3
-        run: |
-            aws s3 cp ${{ secrets.S3_MAGENTO_CODE_BASE_243_FILENAME }} .
-            ls -lh
       - name: Checkout release from github repository
         uses: actions/checkout@v2
+        
+      - name: Perform 
+        run: |
+          mv app/etc/env-$RELEASE_ENV.php app/etc/env.php
+          rm -f app/etc/env-*.php
+          sed -i "s/{CONFIG_DB_HOST}/${{ secrets.CONFIG_DB_HOST }}/g" app/etc/env.php
+          sed -i "s/{CONFIG_DB_NAME}/${{ secrets.CONFIG_DB_NAME }}/g" app/etc/env.php
+          sed -i "s/{CONFIG_DB_USERNAME}/${{ secrets.CONFIG_DB_USERNAME }}/g" app/etc/env.php
+          sed -i "s/{CONFIG_DB_PASSWORD}/${{ secrets.CONFIG_DB_PASSWORD }}/g" app/etc/env.php
+          sed -i "s/{CONFIG_MAGENTO_CRYPT_KEY}/${{ secrets.CONFIG_MAGENTO_CRYPT_KEY }}/g" app/etc/env.php
+          sed -i "s/{CONFIG_REDIS_CONF_CACHE_SERVER}/${{ secrets.CONFIG_REDIS_CONF_CACHE_SERVER }}/g" app/etc/env.php
+          sed -i "s/{CONFIG_REDIS_CONF_CACHE_PORT}/${{ secrets.CONFIG_REDIS_CONF_CACHE_PORT }}/g" app/etc/env.php
+          sed -i "s/{CONFIG_REDIS_CONF_CACHE_PASSWORD}/${{ secrets.CONFIG_REDIS_CONF_CACHE_PASSWORD }}/g" app/etc/env.php
+          sed -i "s/{CONFIG_REDIS_FPC_CACHE_SERVER}/${{ secrets.CONFIG_REDIS_FPC_CACHE_SERVER }}/g" app/etc/env.php
+          sed -i "s/{CONFIG_REDIS_FPC_CACHE_PORT}/${{ secrets.CONFIG_REDIS_FPC_CACHE_PORT }}/g" app/etc/env.php
+          sed -i "s/{CONFIG_REDIS_FPC_CACHE_PASSWORD}/${{ secrets.CONFIG_REDIS_FPC_CACHE_PASSWORD }}/g" app/etc/env.php
+          sed -i "s/{CONFIG_REDIS_SESSION_CACHE_SERVER}/${{ secrets.CONFIG_REDIS_SESSION_CACHE_SERVER }}/g" app/etc/env.php
+          sed -i "s/{CONFIG_REDIS_SESSION_CACHE_PORT}/${{ secrets.CONFIG_REDIS_SESSION_CACHE_PORT }}/g" app/etc/env.php
+          sed -i "s/{CONFIG_REDIS_SESSION_CACHE_PASSWORD}/${{ secrets.CONFIG_REDIS_SESSION_CACHE_PASSWORD }}/g" app/etc/env.php
+          cp specifics/patchs/* . -R
+          rm specifics -R
+          touch $RELEASE_IDENTIFIER
+          tar -czf $RELEASE_IDENTIFIER --exclude=.git --exclude=.github --exclude=.idea --exclude=$RELEASE_IDENTIFIER .
+          mv $RELEASE_IDENTIFIER $DOCUMENT_ROOT
+
+      - name: Download magento code base from S3
+        run: |
+          aws s3 cp ${{ secrets.S3_MAGENTO_CODE_BASE_243_FILENAME }} $DOCUMENT_ROOT
+            
+      - name: Building the application
+        run: |
+          cd $DOCUMENT_ROOT
+          ls -lh
+            
