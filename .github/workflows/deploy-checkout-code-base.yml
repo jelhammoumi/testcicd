@@ -6,7 +6,6 @@ on:
     secrets:
       s3-filename:
         required: true
-        type: string
 
 env:
   RELEASE_IDENTIFIER: electroplanet-release-${{github.run_id}}.tar.gz
