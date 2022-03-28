@@ -71,12 +71,21 @@ jobs:
           path: ${{ env.PROJECT_RELEASE_DIR }}/${{ env.APP_BUILD_IDENTIFIER }}
           retention-days: 1
           
-  checkout-build-deploy:
-    #needs: checkout-release-builder
+  build-deploy:
+    needs: checkout-release-builder
     runs-on: self-hosted
     environment: preprod
+    env:
+      PROJECT_RELEASE_DIR: ${{ secrets.PROJECT_RELEASE_DIR }}
+      
     steps:
-        - name: Deploy the build artifact to all environment instances
-          run: |
-            pwd
-            echo ${{ env.PROJECT_RELEASE_DIR }}/${{ env.APP_BUILD_IDENTIFIER }} > deploy.txt
+      - name: Download the build artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: ${{ env.APP_BUILD_IDENTIFIER }}
+          
+      - name: Deploy the app build
+        run: |
+          mv $APP_BUILD_IDENTIFIER $PROJECT_RELEASE_DIR
+          cd $PROJECT_RELEASE_DIR
+          pwd
