@@ -18,7 +18,6 @@ jobs:
     steps:
       - run: |
           echo S3 file ${{ inputs.S3filename }} > test.txt
-          ls -lh
-          #aws s3 cp ${{ inputs.S3filename }} .
+          aws s3 cp ${{ inputs.S3filename }} .
           
         
