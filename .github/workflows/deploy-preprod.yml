@@ -65,6 +65,5 @@ jobs:
       - name: Store build as artifact
         uses: actions/upload-artifact@v3
         with:
-          name: $APP_BUILD_IDENTIFIER
-          path: $APP_BUILD_IDENTIFIER
+          name: ${{ env.APP_BUILD_IDENTIFIER }}
           retention-days: 1
