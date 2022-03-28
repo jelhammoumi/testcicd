@@ -25,5 +25,3 @@ jobs:
             ls -lh
       - name: Checkout release from github repository
         uses: actions/checkout@v2
-        run: |
-            ls -lh
