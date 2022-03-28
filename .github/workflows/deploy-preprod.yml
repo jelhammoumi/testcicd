@@ -18,11 +18,11 @@ jobs:
     env:
       RELEASE_ENV: ${{ secrets.RELEASE_ENV }}
       DOCUMENT_ROOT: ${{ secrets.DOCUMENT_ROOT }}
-      S3_MAGENTO_CODE_BASE_243_FILENAME: ${{ secrets.S3_MAGENTO_CODE_BASE_243_FILENAME }}
     steps:
-      - id: checkout-release
-        uses: actions/checkout@v2
-      - id: checkout-magent-codebase
-        uses: ./.github/workflows/deploy-checkout-code-base.yml
-        secrets:
-            S3filename: $S3_MAGENTO_CODE_BASE_243_FILENAME
+      - uses: actions/checkout@v2
+  
+  checkout-code-base:
+    needs: checkout-release
+    uses: ./.github/workflows/deploy-checkout-code-base.yml
+    with:
+     S3filename: ${{ secrets.S3_MAGENTO_CODE_BASE_243_FILENAME }}
