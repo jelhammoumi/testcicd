@@ -13,17 +13,17 @@ env:
   
 jobs:
   checkout-release:
-    runs-on: testcicd
+    runs-on: vm-epecom-admin
     environment: preprod
     env:
       RELEASE_ENV: ${{ secrets.RELEASE_ENV }}
       DOCUMENT_ROOT: ${{ secrets.DOCUMENT_ROOT }}
     steps:
-      - uses: actions/checkout@v2
-      
-  
-  checkout-code-base:
-    needs: checkout-release
-    uses: ./.github/workflows/deploy-checkout-code-base.yml
-    with:
-     S3filename: s3://digibay-prod2/magento/release/magento-code-base-2.4.3-v1.tar
+      - name: Download magento code base from S3
+        run: |
+            aws s3 cp ${{ secrets.S3_MAGENTO_CODE_BASE_243_FILENAME }} .
+            ls -lh
+      - name: Checkout release from github repository
+        uses: actions/checkout@v2
+        run: |
+            ls -lh
