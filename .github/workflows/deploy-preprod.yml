@@ -8,8 +8,6 @@ on:
 
   workflow_dispatch:
 
-
-environment: preprod
 env:
   RELEASE_IDENTIFIER: electroplanet-release-${{github.run_id}}.tar.gz
   S3_MAGENTO_CODE_BASE_243_FILENAME: test.tar.gz
