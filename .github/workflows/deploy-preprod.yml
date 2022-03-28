@@ -11,7 +11,6 @@ on:
 env:
   RELEASE_IDENTIFIER: electroplanet-release-${{github.run_id}}.tar.gz
   APP_BUILD_IDENTIFIER: electroplanet-build-${{github.run_id}}.tar.gz
-  PROJECT_RELEASE_DIR:
   
 jobs:
   checkout-release-builder:
@@ -86,6 +85,7 @@ jobs:
           
       - name: Deploy the app build
         run: |
+          (if [ ! -d "${PROJECT_RELEASE_DIR}" ]; then mkdir $PROJECT_RELEASE_DIR; fi);
           mv $APP_BUILD_IDENTIFIER $PROJECT_RELEASE_DIR/
           cd $PROJECT_RELEASE_DIR
           tar -h -xf $APP_BUILD_IDENTIFIER
