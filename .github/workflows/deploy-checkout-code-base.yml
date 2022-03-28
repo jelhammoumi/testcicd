@@ -3,7 +3,7 @@ name: EP CI/CD - MAGENTO CODE BASE
 
 on:
   workflow_call:
-    inputs:
+    secrets:
       s3-filename:
         required: true
         type: string
@@ -16,7 +16,7 @@ jobs:
     name: "EP CI/CD - MAGENTO CODE BASE"
     steps:
       - run: |
-          echo S3 file ${{ inputs.s3-filename }}
-          aws s3 cp ${{ inputs.s3-filename }} .
+          echo S3 file ${{ secrets.s3-filename }}
+          aws s3 cp ${{ secrets.s3-filename }} .
           
         
