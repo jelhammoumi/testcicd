@@ -8,13 +8,14 @@ on:
 
   workflow_dispatch:
 
+
+environment: preprod
 env:
   RELEASE_IDENTIFIER: electroplanet-release-${{github.run_id}}.tar.gz
   
 jobs:
   checkout-release:
     runs-on: testcicd
-    environment: preprod
     env:
       RELEASE_ENV: ${{ secrets.RELEASE_ENV }}
       DOCUMENT_ROOT: ${{ secrets.DOCUMENT_ROOT }}
@@ -24,5 +25,5 @@ jobs:
   checkout-code-base:
     needs: checkout-release
     uses: ./.github/workflows/deploy-checkout-code-base.yml
-    with:
+    secrets:
      S3filename: ${{ secrets.S3_MAGENTO_CODE_BASE_243_FILENAME }}
