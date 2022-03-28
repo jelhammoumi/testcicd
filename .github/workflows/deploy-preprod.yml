@@ -20,9 +20,10 @@ jobs:
       DOCUMENT_ROOT: ${{ secrets.DOCUMENT_ROOT }}
     steps:
       - uses: actions/checkout@v2
+      
   
   checkout-code-base:
     needs: checkout-release
     uses: ./.github/workflows/deploy-checkout-code-base.yml
     with:
-     S3filename: s3://digibay-prod2/magento/release/magento-code-base-2.3.4-v5.tar.gz
+     S3filename: s3://digibay-prod2/magento/release/magento-code-base-2.4.3-v1.tar
