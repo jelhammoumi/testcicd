@@ -66,5 +66,5 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: $APP_BUILD_IDENTIFIER
-          path: $PROJECT_RELEASE_DIR/$APP_BUILD_IDENTIFIER
+          path: ${PROJECT_RELEASE_DIR}/${APP_BUILD_IDENTIFIER}
           retention-days: 1
