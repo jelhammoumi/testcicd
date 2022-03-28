@@ -6,6 +6,7 @@ on:
     inputs:
       S3filename:
         required: true
+        type: string
 
 env:
   RELEASE_IDENTIFIER: electroplanet-release-${{github.run_id}}.tar.gz
